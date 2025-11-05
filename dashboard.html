@@ -65,6 +65,23 @@
         <a href="${shareURL}" target="_blank">${shareURL}</a>
       `;
     });
+    // Get the selected template name from the URL
+const params = new URLSearchParams(window.location.search);
+const selectedTemplate = params.get('template') || 'template.html';
+
+// Update your share link builder to use this template
+document.getElementById('generateLink').addEventListener('click', () => {
+  const link1 = document.getElementById('link1').value;
+  const link2 = document.getElementById('link2').value;
+  const link3 = document.getElementById('link3').value;
+  const encoded = encodeURIComponent(JSON.stringify({ link1, link2, link3 }));
+
+  const shareURL = `${window.location.origin}/${selectedTemplate}?data=${encoded}`;
+  document.getElementById('shareOutput').innerHTML = `
+    <p>Share this link:</p>
+    <a href="${shareURL}" target="_blank">${shareURL}</a>
+  `;
+});
   </script>
 </body>
 </html>
