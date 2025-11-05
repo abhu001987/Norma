@@ -55,6 +55,40 @@ if (data) {
   anchors[1].href = links.link2 || "#";
   anchors[2].href = links.link3 || "#";
 }
+window.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const data = params.get("data");
+
+  if (data) {
+    try {
+      const decoded = decodeURIComponent(data);
+      const links = JSON.parse(decoded);
+
+      console.log("Loaded links:", links); // For debugging
+
+      // Update all product anchors dynamically
+      const productAnchors = document.querySelectorAll(".product a");
+      if (productAnchors.length > 0) {
+        if (links.link1) productAnchors[0].href = links.link1;
+        if (links.link2) productAnchors[1].href = links.link2;
+        if (links.link3) productAnchors[2].href = links.link3;
+      }
+
+      // Update extra product section if it exists
+      const extraProducts = document.querySelectorAll(".extra-products img");
+      if (extraProducts.length > 0) {
+        if (links.link1) extraProducts[0].parentElement.href = links.link1;
+        if (links.link2) extraProducts[1].parentElement.href = links.link2;
+        if (links.link3) extraProducts[2].parentElement.href = links.link3;
+      }
+
+    } catch (err) {
+      console.error("Error parsing data:", err);
+    }
+  } else {
+    console.log("No data found in URL.");
+  }
+});
   </script>
 </body>
 </html>
