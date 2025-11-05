@@ -46,14 +46,15 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const data = params.get('data');
-    if (data) {
-      const links = JSON.parse(decodeURIComponent(data));
-      const anchors = document.querySelectorAll('#productContainer a');
-      anchors[0].href = links.link1 || "#";
-      anchors[1].href = links.link2 || "#";
-      anchors[2].href = links.link3 || "#";
-    }
+const data = params.get('data');
+
+if (data) {
+  const links = JSON.parse(decodeURIComponent(data));
+  const anchors = document.querySelectorAll('#productContainer a');
+  anchors[0].href = links.link1 || "#";
+  anchors[1].href = links.link2 || "#";
+  anchors[2].href = links.link3 || "#";
+}
   </script>
 </body>
 </html>
